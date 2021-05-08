@@ -1,0 +1,30 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  hello-k8s-python
+spec:
+  selector:
+    matchLabels:
+      app: hello-k8s-python
+  template:
+    metadata:
+      labels:
+        app:  hello-k8s-python
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  hello-k8s-python
+        image:  is1394/hello-k8s-python:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  5000
